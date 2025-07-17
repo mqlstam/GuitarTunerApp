@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tuner</title>
+    <link rel="stylesheet" href="style.css?v=1.5">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#000000"/>
+</head>
+<body>
+    <header>
+        <h1 class="title">Tuner</h1>
+        <div id="status-indicator" class="status-indicator-off"></div>
+    </header>
+    <main>
+        <canvas id="tuner-canvas"></canvas>
+        <div class="readouts">
+            <div class="readout-item">
+                <span id="frequency-readout">--</span> HERTZ
+            </div>
+            <div class="readout-item note-readout">
+                <span id="note-readout">--</span>
+            </div>
+            <div class="readout-item">
+                <span id="cents-readout">--</span> CENTS
+            </div>
+        </div>
+        <button id="start-button">Start</button>
+        <p id="permission-message" class="hidden">Microphone access is required. Please enable it in your browser settings and refresh.</p>
+    </main>
+    <script src="main.js" type="module"></script>
+</body>
+</html>
