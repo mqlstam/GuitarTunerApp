@@ -25,12 +25,65 @@
     display: none;
 }
 
-
-
+/* Enhanced full-height coverage for PWA */
 html,
 body {
     background-color: #0f172a !important;
-    height: 100%; /* Ensure full height coverage */
+    height: 100%;
     min-height: 100vh;
     min-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    /* Ensure no scrolling */
+    overflow: hidden;
+    /* Prevent any potential white backgrounds from showing */
+    -webkit-background-size: cover;
+    background-size: cover;
+}
+
+/* Additional PWA-specific styling */
+body {
+    /* Prevent bounce scroll on iOS */
+    overscroll-behavior: none;
+    /* Prevent zoom on double tap */
+    touch-action: manipulation;
+    /* Ensure consistent background on all devices */
+    background-attachment: fixed;
+}
+
+/* Make sure the main container fills the entire viewport */
+main {
+    /* Ensure full viewport coverage */
+    min-height: 100vh;
+    min-height: 100dvh;
+}
+
+/* Android PWA specific fixes */
+@media (display-mode: standalone) {
+    body {
+        /* Ensure background extends to navigation bar area */
+        background-color: #0f172a !important;
+        /* Prevent any gaps */
+        padding: 0;
+        margin: 0;
+    }
+    
+    /* Make sure overlay covers everything in PWA mode */
+    #start-overlay {
+        /* Ensure overlay covers status bar and navigation areas */
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgba(15, 23, 42, 0.8) !important;
+    }
+}
+
+/* Specific fix for Android gesture navigation */
+@supports (padding: env(safe-area-inset-bottom)) {
+    body {
+        /* Ensure background extends into safe areas */
+        padding-bottom: env(safe-area-inset-bottom);
+        background-color: #0f172a !important;
+    }
 }

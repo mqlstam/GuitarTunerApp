@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-slate-900">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -9,18 +9,21 @@
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="/android/android-launchericon-192-192.png">
     <link rel="apple-touch-icon" href="/ios/180.png">
+    
+    <!-- Enhanced theme color meta tags -->
     <meta name="theme-color" content="#0f172a">
-    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: light)"/>
-    <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)"/>
+    <meta name="msapplication-navbutton-color" content="#0f172a">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    
+    <!-- Additional Android specific meta tags -->
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
 </head>
-<!-- Fullscreen background behind everything (gesture bar fix) -->
-<div class="fixed inset-0 z-[-2] bg-slate-900"></div>
+<body class="bg-slate-900 text-slate-300 font-sans h-dvh overflow-hidden">
 
-<body class="bg-slate-900 text-slate-300 font-sans min-h-screen overflow-x-hidden relative">
-
-<main class="w-full max-w-4xl mx-auto p-4 flex flex-col min-h-[100dvh] text-center pb-[env(safe-area-inset-bottom)]">
+    <main class="w-full max-w-4xl mx-auto p-4 flex flex-col h-full text-center">
 
         <!-- Header -->
         <header class="w-full flex justify-between items-center mb-6 md:mb-8 flex-shrink-0 pt-[env(safe-area-inset-top)]">
@@ -53,19 +56,19 @@
             <canvas id="tuner-canvas" class="w-full h-full bg-slate-800 rounded-lg shadow-lg"></canvas>
         </div>
 
-</main>
+        <!-- Bottom spacer that respects safe area -->
+        <div class="h-20 flex-shrink-0 pb-[env(safe-area-inset-bottom)]"></div>
 
-<!-- Start Overlay -->
-<div id="start-overlay" class="fixed inset-0 bg-slate-900 bg-opacity-80 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300">
-    <div class="text-center">
-        <button id="start-button" class="text-2xl px-10 py-5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold focus:outline-none focus:ring-4 focus:ring-emerald-500/50 transition-all duration-200 ease-in-out transform hover:scale-105">Start Tuner</button>
-        <p id="permission-message" class="hidden mt-6 text-rose-400 max-w-xs mx-auto">Microphone access is required. Please enable it in your browser settings and refresh.</p>
+    </main>
+
+    <!-- Start Overlay -->
+    <div id="start-overlay" class="fixed inset-0 bg-slate-900 bg-opacity-80 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300">
+        <div class="text-center">
+            <button id="start-button" class="text-2xl px-10 py-5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold focus:outline-none focus:ring-4 focus:ring-emerald-500/50 transition-all duration-200 ease-in-out transform hover:scale-105">Start Tuner</button>
+            <p id="permission-message" class="hidden mt-6 text-rose-400 max-w-xs mx-auto">Microphone access is required. Please enable it in your browser settings and refresh.</p>
+        </div>
     </div>
-</div>
 
-<!-- ✅ Add this filler to cover the gesture bar area -->
-<div class="fixed bottom-0 left-0 right-0 h-[env(safe-area-inset-bottom)] bg-slate-900 z-[-1]"></div>
-
-<script src="main.js" type="module"></script>
+    <script src="main.js" type="module"></script>
 </body>
 </html>
