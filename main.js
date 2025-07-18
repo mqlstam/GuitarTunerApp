@@ -1,6 +1,7 @@
 import { PitchDetector } from "https://esm.sh/pitchy@4";
 
 document.addEventListener('DOMContentLoaded', () => {
+    const startOverlay = document.getElementById('start-overlay');
     const startButton = document.getElementById('start-button');
     const permissionMessage = document.getElementById('permission-message');
     const statusIndicator = document.getElementById('status-indicator');
@@ -13,7 +14,6 @@ document.addEventListener('DOMContentLoaded', () => {
     let audioContext;
     let analyser;
     let detector;
-    let input;
 
     const A4 = 440;
     const NOTE_NAMES = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
@@ -223,7 +223,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             statusIndicator.classList.remove('status-indicator-off');
             statusIndicator.classList.add('status-indicator-on');
-            startButton.classList.add('hidden');
+            
+            // Hide the overlay
+            startOverlay.classList.add('opacity-0', 'pointer-events-none');
 
             lastFrameTime = performance.now();
             requestAnimationFrame(processAudio);

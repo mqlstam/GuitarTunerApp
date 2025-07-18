@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>TuneWave - Online Instrument Tuner</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="style.css?v=1.8">
+    <link rel="stylesheet" href="style.css?v=1.9">
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="/android/android-launchericon-192-192.png">
     <link rel="apple-touch-icon" href="/ios/180.png">
@@ -13,7 +13,7 @@
 </head>
 <body class="bg-slate-900 text-slate-300 font-sans">
 
-    <main class="w-full max-w-4xl mx-auto p-4 flex flex-col h-screen text-center">
+    <main class="w-full max-w-4xl mx-auto p-4 flex flex-col h-dvh text-center">
 
         <!-- Header -->
         <header class="w-full flex justify-between items-center mb-6 md:mb-8 flex-shrink-0">
@@ -46,13 +46,18 @@
             <canvas id="tuner-canvas" class="w-full h-full bg-slate-800 rounded-lg shadow-lg"></canvas>
         </div>
 
-        <!-- Controls -->
-        <div class="h-20 flex-shrink-0"> <!-- Spacer to prevent layout shift -->
-            <button id="start-button" class="text-xl px-8 py-4 rounded-lg bg-emerald-600 hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-500/50 transition-all duration-200 ease-in-out">Start</button>
-            <p id="permission-message" class="hidden mt-4 text-rose-400">Microphone access is required. Please enable it in your browser settings and refresh.</p>
-        </div>
+        <!-- Controls are now in the overlay -->
+        <div class="h-20 flex-shrink-0"></div> <!-- Spacer -->
 
     </main>
+
+    <!-- Start Overlay -->
+    <div id="start-overlay" class="fixed inset-0 bg-slate-900 bg-opacity-80 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300">
+        <div class="text-center">
+            <button id="start-button" class="text-2xl px-10 py-5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold focus:outline-none focus:ring-4 focus:ring-emerald-500/50 transition-all duration-200 ease-in-out transform hover:scale-105">Start Tuner</button>
+            <p id="permission-message" class="hidden mt-6 text-rose-400 max-w-xs mx-auto">Microphone access is required. Please enable it in your browser settings and refresh.</p>
+        </div>
+    </div>
 
     <script src="main.js" type="module"></script>
 </body>
