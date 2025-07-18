@@ -165,7 +165,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rms = Math.sqrt(sumOfSquares / input.length);
         const db = 20 * Math.log10(rms);
 
-        if (isFinite(db) && db > -300) {
+        if (isFinite(db) && db > -400) {
             const [pitch, clarity] = detector.findPitch(input, audioContext.sampleRate);
 
             if (clarity > 0.95) {
