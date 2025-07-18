@@ -87,17 +87,17 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.clearRect(0, 0, width, height);
 
         // Draw the "in tune" band
-        ctx.fillStyle = 'rgba(0, 255, 0, 0.2)'; // Semi-transparent light green
+        ctx.fillStyle = 'rgba(16, 185, 129, 0.15)'; // Emerald-500 at 15% opacity
         ctx.fillRect(center - (inTuneBandWidth / 2), 0, inTuneBandWidth, height);
 
-        // Draw green center line
-        ctx.fillStyle = 'green';
+        // Draw emerald center line
+        ctx.fillStyle = '#10b981'; // Emerald-500
         ctx.fillRect(center - 1, 0, 2, height);
 
         const positions = history.map(cents => cents === null ? null : center + (center * (cents / 50)));
 
-        // Draw red "out-of-tune" gaps first
-        ctx.fillStyle = 'red';
+        // Draw out-of-tune gaps: a soft red for both sharp and flat
+        ctx.fillStyle = '#f43f5e'; // Rose-500
         for (let y = 0; y < positions.length; y++) {
             const cents = history[y];
             if (cents !== null && Math.abs(cents) >= inTuneCents) {
@@ -110,8 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Draw the white, interpolated line over the top
-        ctx.strokeStyle = 'white';
+        // Draw the main scrolling line
+        ctx.strokeStyle = '#f1f5f9'; // Slate-100
         ctx.lineWidth = 2;
         ctx.beginPath();
 
@@ -145,9 +145,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function updateBackgroundColor(cents) {
         if (cents !== null && Math.abs(cents) < 5) {
-            canvas.style.backgroundColor = '#023020'; // Dark muted green
+            canvas.style.backgroundColor = '#064e3b'; // Dark emerald-800
         } else {
-            canvas.style.backgroundColor = '#111'; // Default dark grey
+            canvas.style.backgroundColor = '#1e293b'; // Default slate-800
         }
     }
 
@@ -192,7 +192,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isFinite(db) && db > -1000) {
             const [pitch, clarity] = detector.findPitch(input, audioContext.sampleRate);
 
-            if (clarity > 0.95) {
+            if (clarity > 0.90) {
                 const noteData = getNoteData(pitch);
                 updateUI(noteData, deltaTime);
             } else {

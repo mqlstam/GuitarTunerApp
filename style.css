@@ -1,88 +1,26 @@
-body {
-    font-family: sans-serif;
-    background-color: #000;
-    background-image: radial-gradient(circle, #222 0%, #000 100%);
-    color: #fff;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100vh;
+/*
+  The vast majority of styling is now handled by Tailwind CSS in index.html.
+  This file is kept for styles that are dynamically controlled by JavaScript.
+*/
+
+/* This allows the JS to smoothly transition the background color of the canvas */
+#tuner-canvas {
     transition: background-color 0.3s ease;
 }
 
-header {
-    position: absolute;
-    top: 0;
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-    box-sizing: border-box;
-}
-
-.title {
-    font-size: 1.5rem;
-}
-
+/* These classes are added/removed by main.js to indicate microphone status */
 .status-indicator-off {
-    width: 15px;
-    height: 15px;
-    background-color: grey;
-    border-radius: 50%;
+    background-color: #475569; /* Tailwind slate-600 */
 }
 
 .status-indicator-on {
-    width: 15px;
-    height: 15px;
-    background-color: green;
-    border-radius: 50%;
+    background-color: #10b981; /* Tailwind emerald-500 */
+    /* Add a subtle glow when active */
+    box-shadow: 0 0 8px #10b981;
 }
 
-main {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-}
-
-#tuner-canvas {
-    width: 100%;
-    height: 60vh;
-    background-color: #111;
-    transition: background-color 0.3s ease;
-}
-
-.readouts {
-    display: flex;
-    justify-content: space-around;
-    width: 100%;
-    padding: 2rem 0;
-    text-align: center;
-}
-
-.readout-item {
-    flex: 1;
-}
-
-.note-readout {
-    font-size: 5rem;
-    font-weight: bold;
-}
-
-#start-button {
-    font-size: 1.5rem;
-    padding: 1rem 2rem;
-    border-radius: 5px;
-    border: 1px solid #fff;
-    background-color: #000;
-    color: #fff;
-    cursor: pointer;
-}
-
+/* The .hidden class is toggled by JS. Tailwind also has a 'hidden' class,
+   but defining it here ensures it's available and avoids any potential conflicts. */
 .hidden {
     display: none;
 }
