@@ -166,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const db = 20 * Math.log10(rms);
 
         // -50 dB is a reasonable threshold for silence.
-        if (isFinite(db) && db > -200) {
+        if (isFinite(db) && db > -300) {
             const [pitch, clarity] = detector.findPitch(input, audioContext.sampleRate);
 
             if (clarity > 0.95) {
