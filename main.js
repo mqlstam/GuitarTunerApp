@@ -224,8 +224,13 @@ document.addEventListener('DOMContentLoaded', () => {
             statusIndicator.classList.remove('status-indicator-off');
             statusIndicator.classList.add('status-indicator-on');
             
-            // Hide the overlay
-            startOverlay.classList.add('hidden');
+            // Start the fade-out animation for the overlay
+            startOverlay.classList.add('opacity-0');
+            
+            // After the animation finishes, hide it completely
+            setTimeout(() => {
+                startOverlay.classList.add('hidden');
+            }, 300); // This duration should match the transition duration in the CSS
 
             lastFrameTime = performance.now();
             requestAnimationFrame(processAudio);
