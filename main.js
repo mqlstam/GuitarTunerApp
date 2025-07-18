@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', () => {
             statusIndicator.classList.add('status-indicator-on');
             
             // Hide the overlay
-            startOverlay.classList.add('opacity-0', 'pointer-events-none');
+            startOverlay.classList.add('hidden');
 
             lastFrameTime = performance.now();
             requestAnimationFrame(processAudio);
