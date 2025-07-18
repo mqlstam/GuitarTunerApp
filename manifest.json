@@ -3,8 +3,8 @@
     "short_name": "TuneWave",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#111827",
-    "theme_color": "#111827",
+    "background_color": "#0f172a",
+    "theme_color": "#0f172a",
     "description": "A simple, responsive, and accurate instrument tuner that works anywhere.",
     "icons": [
         {
