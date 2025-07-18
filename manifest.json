@@ -2,11 +2,10 @@
     "name": "TuneWave - Online Instrument Tuner",
     "short_name": "TuneWave",
     "start_url": ".",
-    "display": "standalone",
+    "display": "fullscreen",
     "background_color": "#0f172a",
     "theme_color": "#0f172a",
     "description": "A simple, responsive, and accurate instrument tuner that works anywhere.",
-    "display_override": ["window-controls-overlay", "standalone"],
     "orientation": "portrait",
     "icons": [
         {
