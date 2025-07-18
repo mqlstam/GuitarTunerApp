@@ -49,19 +49,19 @@
             <canvas id="tuner-canvas" class="w-full h-full bg-slate-800 rounded-lg shadow-lg"></canvas>
         </div>
 
-        <!-- Controls are now in the overlay -->
-        <div class="h-20 flex-shrink-0"></div> <!-- Spacer -->
+</main>
 
-    </main>
-
-    <!-- Start Overlay -->
-    <div id="start-overlay" class="fixed inset-0 bg-slate-900 bg-opacity-80 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300">
-        <div class="text-center">
-            <button id="start-button" class="text-2xl px-10 py-5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold focus:outline-none focus:ring-4 focus:ring-emerald-500/50 transition-all duration-200 ease-in-out transform hover:scale-105">Start Tuner</button>
-            <p id="permission-message" class="hidden mt-6 text-rose-400 max-w-xs mx-auto">Microphone access is required. Please enable it in your browser settings and refresh.</p>
-        </div>
+<!-- Start Overlay -->
+<div id="start-overlay" class="fixed inset-0 bg-slate-900 bg-opacity-80 backdrop-blur-sm flex items-center justify-center transition-opacity duration-300">
+    <div class="text-center">
+        <button id="start-button" class="text-2xl px-10 py-5 rounded-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold focus:outline-none focus:ring-4 focus:ring-emerald-500/50 transition-all duration-200 ease-in-out transform hover:scale-105">Start Tuner</button>
+        <p id="permission-message" class="hidden mt-6 text-rose-400 max-w-xs mx-auto">Microphone access is required. Please enable it in your browser settings and refresh.</p>
     </div>
+</div>
 
-    <script src="main.js" type="module"></script>
+<!-- ✅ Add this filler to cover the gesture bar area -->
+<div class="fixed bottom-0 left-0 right-0 h-[env(safe-area-inset-bottom)] bg-slate-900 z-[-1]"></div>
+
+<script src="main.js" type="module"></script>
 </body>
 </html>
