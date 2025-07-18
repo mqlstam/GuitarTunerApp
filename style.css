@@ -27,8 +27,10 @@
 
 
 
+html,
 body {
     background-color: #0f172a !important;
+    height: 100%; /* Ensure full height coverage */
     min-height: 100vh;
     min-height: 100dvh;
 }
