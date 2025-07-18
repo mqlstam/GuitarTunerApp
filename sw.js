@@ -1,8 +1,9 @@
-const CACHE_NAME = 'tunewave-cache-v2'; // Updated cache name
+const CACHE_NAME = 'tunewave-cache-v3'; // Increment this name whenever you make changes to the app shell (HTML, CSS, JS) to ensure users get the latest version. // Updated cache name
 const APP_SHELL_URLS = [
     '/index.html',
     '/style.css',
     '/main.js',
+    '/pitchy.js', // Added pitchy.js to app shell
     '/manifest.json'
 ];
 
