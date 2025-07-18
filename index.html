@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="bg-slate-900">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -9,14 +9,18 @@
     <link rel="manifest" href="manifest.json">
     <link rel="icon" type="image/png" sizes="192x192" href="/android/android-launchericon-192-192.png">
     <link rel="apple-touch-icon" href="/ios/180.png">
+    <meta name="theme-color" content="#0f172a">
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: light)"/>
     <meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)"/>
     <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 </head>
-<body class="bg-slate-900 text-slate-300 font-sans h-dvh">
+<!-- Fullscreen background behind everything (gesture bar fix) -->
+<div class="fixed inset-0 z-[-2] bg-slate-900"></div>
 
-    <main class="w-full max-w-4xl mx-auto p-4 flex flex-col h-full text-center pb-[env(safe-area-inset-bottom)]">
+<body class="bg-slate-900 text-slate-300 font-sans min-h-screen overflow-x-hidden relative">
+
+<main class="w-full max-w-4xl mx-auto p-4 flex flex-col min-h-[100dvh] text-center pb-[env(safe-area-inset-bottom)]">
 
         <!-- Header -->
         <header class="w-full flex justify-between items-center mb-6 md:mb-8 flex-shrink-0 pt-[env(safe-area-inset-top)]">
