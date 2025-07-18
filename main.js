@@ -36,24 +36,45 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     let history; // Initialized in resizeCanvas
+    let lastFrameTime = 0;
+    let scrollAccumulator = 0;
+    const SCROLL_DURATION_MS = 4000; // 4 seconds
 
-    function updateUI(noteData) {
+    function updateUI(noteData, deltaTime) {
         if (noteData) {
-            // Add new data to history, redraw, and update text
-            history.unshift(noteData.cents);
-            history.pop();
-            updateCanvas();
+            // A clear note is detected: update text and scroll the graph
             frequencyReadout.textContent = noteData.frequency.toFixed(1);
             noteReadout.textContent = `${noteData.noteName}${noteData.octave}`;
             centsReadout.textContent = noteData.cents.toFixed(1);
+            updateBackgroundColor(noteData.cents);
+
+            // Scroll the canvas based on elapsed time
+            if (deltaTime > 0) {
+                const scrollSpeed = canvas.clientHeight / SCROLL_DURATION_MS; // pixels per millisecond
+                scrollAccumulator += scrollSpeed * deltaTime;
+                const pixelsToShift = Math.floor(scrollAccumulator);
+
+                if (pixelsToShift > 0) {
+                    for (let i = 0; i < pixelsToShift; i++) {
+                        history.unshift(noteData.cents);
+                        history.pop();
+                    }
+                    scrollAccumulator -= pixelsToShift;
+                    updateCanvas(); // Redraw canvas only when history changes
+                }
+            } else if (deltaTime === 0) {
+                // On the first frame, just draw the initial state
+                updateCanvas();
+            }
         } else {
-            // Freeze graph by only clearing text readouts
+            // No clear note detected: clear text and freeze the graph
             frequencyReadout.textContent = '--';
             noteReadout.textContent = '--';
             centsReadout.textContent = '--';
+            updateBackgroundColor(null);
+            // Crucially, we DO NOT update history or redraw the canvas,
+            // which leaves the graph frozen in its last state.
         }
-        // Always update the background color based on the latest data
-        updateBackgroundColor(noteData ? noteData.cents : null);
     }
 
     function updateCanvas() {
@@ -153,7 +174,10 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    function processAudio() {
+    function processAudio(currentTime) {
+        const deltaTime = currentTime - lastFrameTime;
+        lastFrameTime = currentTime;
+
         const input = new Float32Array(detector.inputLength);
         analyser.getFloatTimeDomainData(input);
 
@@ -165,17 +189,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const rms = Math.sqrt(sumOfSquares / input.length);
         const db = 20 * Math.log10(rms);
 
-        if (isFinite(db) && db > -400) {
+        if (isFinite(db) && db > -1000) {
             const [pitch, clarity] = detector.findPitch(input, audioContext.sampleRate);
 
             if (clarity > 0.95) {
                 const noteData = getNoteData(pitch);
-                updateUI(noteData);
+                updateUI(noteData, deltaTime);
             } else {
-                updateUI(null);
+                updateUI(null, deltaTime);
             }
         } else {
-            updateUI(null);
+            updateUI(null, deltaTime);
         }
 
         requestAnimationFrame(processAudio);
@@ -201,7 +225,8 @@ document.addEventListener('DOMContentLoaded', () => {
             statusIndicator.classList.add('status-indicator-on');
             startButton.classList.add('hidden');
 
-            processAudio();
+            lastFrameTime = performance.now();
+            requestAnimationFrame(processAudio);
         } catch (err) {
             console.error(err);
             permissionMessage.classList.remove('hidden');
