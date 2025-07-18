@@ -6,6 +6,8 @@
     "background_color": "#0f172a",
     "theme_color": "#0f172a",
     "description": "A simple, responsive, and accurate instrument tuner that works anywhere.",
+    "display_override": ["window-controls-overlay", "standalone"],
+    "orientation": "portrait",
     "icons": [
         {
             "src": "windows11/SmallTile.scale-100.png",
