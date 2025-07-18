@@ -1,7 +1,3 @@
-/*
-  The vast majority of styling is now handled by Tailwind CSS in index.html.
-  This file is kept for styles that are dynamically controlled by JavaScript.
-*/
 
 /* This allows the JS to smoothly transition the background color of the canvas */
 #tuner-canvas {
@@ -25,20 +21,23 @@
     display: none;
 }
 
+/* Set the base background for the entire page on the <html> element.
+   This is what the browser uses to color the "safe areas" (like the gesture
+   bar area) when using `viewport-fit=cover`. It is the fallback if the
+   theme-color meta tag is not respected. */
+html {
+    background-color: #0f172a; /* Tailwind's slate-900 */
+}
+
 /* Enhanced full-height coverage for PWA */
 html,
 body {
-    background-color: #0f172a !important;
     height: 100%;
-    min-height: 100vh;
     min-height: 100dvh;
     margin: 0;
     padding: 0;
     /* Ensure no scrolling */
     overflow: hidden;
-    /* Prevent any potential white backgrounds from showing */
-    -webkit-background-size: cover;
-    background-size: cover;
 }
 
 /* Additional PWA-specific styling */
@@ -54,7 +53,6 @@ body {
 /* Make sure the main container fills the entire viewport */
 main {
     /* Ensure full viewport coverage */
-    min-height: 100vh;
     min-height: 100dvh;
 }
 
@@ -62,7 +60,7 @@ main {
 @media (display-mode: standalone) {
     body {
         /* Ensure background extends to navigation bar area */
-        background-color: #0f172a !important;
+        background-color: #0f172a; /* This is now inherited from html, but being explicit is okay */
         /* Prevent any gaps */
         padding: 0;
         margin: 0;
@@ -75,7 +73,7 @@ main {
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: rgba(15, 23, 42, 0.8) !important;
+        background-color: rgba(15, 23, 42, 0.8);
     }
 }
 
@@ -84,6 +82,6 @@ main {
     body {
         /* Ensure background extends into safe areas */
         padding-bottom: env(safe-area-inset-bottom);
-        background-color: #0f172a !important;
+        background-color: #0f172a;
     }
 }
