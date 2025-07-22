@@ -9,6 +9,10 @@ A simple and effective guitar tuner built with JavaScript, HTML, and CSS. This P
 - **Responsive Design:** Works on desktop, tablet, and mobile devices.
 - **PWA Ready:** Installable on your device for a native app-like experience and offline use.
 
+## Live Demo
+
+Check out the live version at [mqlstm.com/tuner](https://mqlstm.com/tuner).
+
 ## Getting Started
 
 To run this app locally, you need to serve the files from a local web server. This is because modern browsers require a secure context (HTTPS or localhost) to access the microphone.
