@@ -82,7 +82,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const height = canvas.clientHeight;
         const center = width / 2;
         const inTuneCents = 5;
-        const inTuneBandWidth = (center * (inTuneCents / 50)) * 2;
+        const maxCentsDisplay = 20; // Squeezes the horizontal space, effectively zooming in
+        const inTuneBandWidth = (center * (inTuneCents / maxCentsDisplay)) * 2;
 
         ctx.clearRect(0, 0, width, height);
 
@@ -94,7 +95,7 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.fillStyle = '#10b981'; // Emerald-500
         ctx.fillRect(center - 1, 0, 2, height);
 
-        const positions = history.map(cents => cents === null ? null : center + (center * (cents / 50)));
+        const positions = history.map(cents => cents === null ? null : center + (center * (cents / maxCentsDisplay)));
 
         // Draw out-of-tune gaps: a soft red for both sharp and flat
         ctx.fillStyle = '#f43f5e'; // Rose-500
