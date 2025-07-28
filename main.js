@@ -1,4 +1,5 @@
 import { PitchDetector } from "https://esm.sh/pitchy@4";
+import KalmanFilter from "https://esm.sh/kalmanjs@1.1.0";
 
 document.addEventListener('DOMContentLoaded', () => {
     const startOverlay = document.getElementById('start-overlay');
@@ -175,6 +176,9 @@ document.addEventListener('DOMContentLoaded', () => {
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
+    const centsKalman = new KalmanFilter({R: 0.1, Q: 2});
+    const freqKalman = new KalmanFilter({R: 0.1, Q: 2});
+
     function processAudio(currentTime) {
         const deltaTime = currentTime - lastFrameTime;
         lastFrameTime = currentTime;
@@ -193,8 +197,10 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isFinite(db) && db > -1000) {
             const [pitch, clarity] = detector.findPitch(input, audioContext.sampleRate);
 
-            if (clarity > 0.90) {
+            if (clarity > 0.9) {
                 const noteData = getNoteData(pitch);
+                noteData.cents = centsKalman.filter(noteData.cents);
+                noteData.frequency = freqKalman.filter(noteData.frequency);
                 updateUI(noteData, deltaTime);
             } else {
                 updateUI(null, deltaTime);
